@@ -32,3 +32,33 @@ public:
         else return false;
     }
 };
+
+// finished in 2023.10.23
+class Solution {
+public:
+    vector<char> left = {'(', '{', '['};
+    vector<char> right = {')', '}', ']'};
+    bool isValid(string s) {
+        stack<char> st;
+        for (int i = 0; i < s.size(); ++i) {
+            auto it = find(left.begin(), left.end(), s[i]);
+            if (it != left.end()){
+                st.push(s[i]);
+            } else {
+                if (st.empty()) return false;
+                if (s[i] == right[0]) {
+                    if (st.top() == left[0]) st.pop();
+                    else return false;
+                } else if (s[i] == right[1]) {
+                    if (st.top() == left[1]) st.pop();
+                    else return false;
+                } else {
+                    if (st.top() == left[2]) st.pop();
+                    else return false;
+                }
+            }
+        }
+        if (!st.empty()) return false;
+        return true;
+    }
+};
