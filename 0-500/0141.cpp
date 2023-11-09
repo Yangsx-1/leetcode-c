@@ -21,3 +21,23 @@ bool hasCycle(struct ListNode *head) {
     }
     return true;
 }
+
+// finished in 2023.11.9
+class Solution {
+public:
+    bool hasCycle(ListNode *head) {
+        if (head == nullptr) return false;
+        ListNode* quick = head;
+        ListNode* slow = head;
+        while (quick != nullptr) {
+            for (int i = 0; i < 2; ++i) {
+                if (quick->next != nullptr) quick = quick->next;
+                else return false;
+            }
+            if (slow->next != nullptr) slow = slow->next;
+            else return false;
+            if (quick == slow) return true;
+        }
+        return false;
+    }
+};
