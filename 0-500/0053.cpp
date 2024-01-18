@@ -12,3 +12,16 @@ public:
         return big;
     }
 };
+
+// finished in 2024.1.18
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int pre = 0, maxans = nums[0];
+        for (const auto &x : nums) {
+            pre = max(pre + x, x);
+            maxans = max(maxans, pre);
+        }
+        return maxans;
+    }
+};
