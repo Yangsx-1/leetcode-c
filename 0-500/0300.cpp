@@ -18,3 +18,24 @@ public:
         return max;
     }
 };
+
+// finished in 2024.1.25
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        vector<int> dp(nums.size());
+        int maxans = 1;
+        dp[0] = 1;
+        for(int i = 1; i < nums.size(); ++i) {
+            int lastmax = 0;
+            for (int j = i; j >= 0; --j) {
+                if (nums[i] > nums[j]) {
+                    if (dp[j] > lastmax) lastmax = dp[j];
+                }
+            }
+            dp[i] = lastmax + 1;
+            if (dp[i] > maxans) maxans = dp[i];
+        }
+        return maxans;
+    }
+};
