@@ -17,3 +17,25 @@ public:
     return ans;
     }
 };
+
+// finished in 2024.2.19
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int left = 0, right = height.size()-1;
+        int maxleft = 0, maxright = 0;
+        int ans = 0;
+        while (left < right) {
+            maxleft = max(maxleft, height[left]);
+            maxright = max(maxright, height[right]);
+            if (height[left] < height[right]) {
+                ans += maxleft - height[left];
+                ++left;
+            } else {
+                ans += maxright - height[right];
+                --right;
+            }
+        }
+        return ans;
+    }
+};
