@@ -29,3 +29,37 @@ struct ListNode* partition(struct ListNode* head, int x){
     small->next = newhead2->next;
     return newhead1->next;
 }
+
+// finished in 2024.2.23
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* partition(ListNode* head, int x) {
+        ListNode* smalldummy = new ListNode(0);
+        ListNode* largedummy = new ListNode(0);
+        ListNode* p = smalldummy, *q = largedummy;
+        while (head) {
+            ListNode* tmp = head;
+            head = head->next;
+            tmp->next = nullptr;
+            if (tmp->val < x) {
+                p->next = tmp;
+                p = p->next;
+            } else {
+                q->next = tmp;
+                q = q->next;
+            }
+        }
+        p->next = largedummy->next;
+        return smalldummy->next;
+    }
+};
